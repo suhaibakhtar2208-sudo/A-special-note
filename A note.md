@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter to My Love</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blush: {
+                            50: '#fff5f7',
+                            100: '#ffe3e8',
+                            200: '#fccad3',
+                            300: '#f9a3b3',
+                            400: '#f46e88',
+                            500: '#e63b60',
+                            600: '#d01e47',
+                            800: '#8c1634',
+                        },
+                        rosegold: {
+                            light: '#fdf4f3',
+                            DEFAULT: '#b76e79',
+                            dark: '#8e4a54'
+                        },
+                        cream: '#fffdf9',
+                        champagne: '#f7efe2',
+                        burgundy: '#3d121e',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 253, 249, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(249, 163, 179, 0.3);
+            box-shadow: 0 12px 36px 0 rgba(140, 22, 52, 0.05);
+        }
+
+        .glass-card-dark {
+            background: rgba(61, 18, 30, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 227, 232, 0.25);
+        }
+
+        /* Ambient floating petals */
+        @keyframes floatPetal {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            30% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatPetal 14s linear infinite;
+        }
+
+        /* Soft Background Glow */
+        @keyframes ambientPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(1.15); }
+        }
+
+        .glow-bg {
+            animation: ambientPulse 10s ease-in-out infinite;
+        }
+
+        /* Smooth positioning transition for evasive button */
+        .runaway-btn {
+            transition: left 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), top 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blush-50 via-cream to-champagne text-burgundy font-sans min-h-screen overflow-x-hidden selection:bg-blush-200 selection:text-burgundy relative">
+
+    <!-- Ambient Floating Petals Container -->
+    <div id="petals-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Soft Ambient Lighting Circles -->
+    <div class="fixed top-1/4 left-1/4 w-96 h-96 bg-blush-200/40 rounded-full blur-3xl glow-bg pointer-events-none"></div>
+    <div class="fixed bottom-1/3 right-1/4 w-96 h-96 bg-rosegold-light/60 rounded-full blur-3xl glow-bg pointer-events-none" style="animation-delay: 5s;"></div>
+
+    <!-- Main Outer Container -->
+    <div class="relative z-10 max-w-4xl mx-auto px-4 py-10 md:py-16 flex flex-col gap-16 md:gap-24">
+
+        <!-- HERO / HEADER SECTION -->
+        <header class="text-center min-h-[80vh] flex flex-col justify-center items-center relative">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-rosegold-dark mb-6 text-sm font-medium tracking-wide">
+                <i class="fa-solid fa-sparkles text-xs text-blush-500"></i>
+                <span>A Straightforward & Heartfelt Promise</span>
+                <i class="fa-solid fa-sparkles text-xs text-blush-500"></i>
+            </div>
+            
+            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-burgundy mb-6 leading-tight">
+                To My Dearest <span class="italic font-normal text-rosegold border-b-2 border-blush-300 pb-1">Shifa</span>
+            </h1>
+
+            <p class="max-w-2xl text-lg sm:text-xl text-burgundy/80 font-light leading-relaxed mb-12">
+                Every story has a beginning, but meeting you showed me a kind of sincerity I knew I wanted to keep forever. Here is my heart, written as clearly as I feel it.
+            </p>
+
+            <a href="#story" class="group flex flex-col items-center gap-2 text-rosegold hover:text-burgundy transition-colors duration-300 cursor-pointer">
+                <span class="text-xs uppercase tracking-widest font-semibold">Scroll Through My Words</span>
+                <div class="w-10 h-10 rounded-full glass-card flex items-center justify-center group-hover:translate-y-1 transition-transform">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </a>
+        </header>
+
+
+        <!-- SECTION 1: WHO I AM & MY PAST -->
+        <section id="story" class="scroll-mt-12">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 md:p-14 relative overflow-hidden">
+                <div class="absolute -right-12 -top-12 w-40 h-40 bg-blush-100/50 rounded-full blur-2xl"></div>
+                
+                <div class="flex items-center gap-3 text-rosegold-dark mb-4">
+                    <i class="fa-solid fa-heart-pulse text-lg"></i>
+                    <h2 class="text-xs font-semibold uppercase tracking-widest">Chapter I</h2>
+                </div>
+
+                <h3 class="font-serif text-3xl sm:text-4xl font-bold text-burgundy mb-8">Who I Am & How You Changed My World</h3>
+
+                <div class="space-y-6 text-burgundy/90 text-base sm:text-lg leading-relaxed font-light">
+                    <p>
+                        Before you entered my life, I spent my days focused purely on my goals and personal routine. I used to think happiness was built entirely on quiet independence and individual achievements.
+                    </p>
+                    <p>
+                        My past taught me to be self-reliant, but it also made me reserved. I wasn't actively looking for someone because I believed genuine, lasting connections were rare.
+                    </p>
+                    <p class="p-5 rounded-2xl bg-blush-50/80 border-l-4 border-rosegold italic text-burgundy font-serif text-xl">
+                        "Then I met you. Without grand announcements or dramatic shifts, everything quietly changed. Ordinary moments suddenly felt meaningful, and my vision of the future suddenly had you in it."
+                    </p>
+                    <p>
+                        You brought a gentle warmth into my world. Being around you inspires me to be better every single day—not for show, but out of genuine care.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 2: INTENTIONS & LOVE LANGUAGE -->
+        <section class="scroll-mt-12">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 md:p-14 relative overflow-hidden">
+                <div class="flex items-center gap-3 text-rosegold-dark mb-4">
+                    <i class="fa-solid fa-compass text-lg"></i>
+                    <h2 class="text-xs font-semibold uppercase tracking-widest">Chapter II</h2>
+                </div>
+
+                <h3 class="font-serif text-3xl sm:text-4xl font-bold text-burgundy mb-8">My Pure Intentions & Love Language</h3>
+
+                <div class="space-y-8">
+                    
+                    <!-- Point 1: Sincerity vs Casual Dating -->
+                    <div class="flex flex-col sm:flex-row gap-5 items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-blush-100 text-blush-600 flex items-center justify-center shrink-0 text-xl font-semibold">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-2xl font-bold text-burgundy mb-2">Intentional Love Over Words</h4>
+                            <p class="text-burgundy/80 leading-relaxed font-light text-base sm:text-lg">
+                                I know today’s world often treats relationships casually or for temporary fun. Coming from Delhi, I’ve seen that culture—but that isn't who I am. I may not know how to flirt or charm someone with clever, poetic talk, but my love language lives in actions: observing the smallest details about you and doing whatever I can to bring a genuine smile to your face.
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="border-blush-100">
+
+                    <!-- Point 2: Distance, Age & Family First -->
+                    <div class="flex flex-col sm:flex-row gap-5 items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-blush-100 text-blush-600 flex items-center justify-center shrink-0 text-xl font-semibold">
+                            <i class="fa-solid fa-people-roof"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-2xl font-bold text-burgundy mb-2">Patience Across Distance & Age</h4>
+                            <p class="text-burgundy/80 leading-relaxed font-light text-base sm:text-lg">
+                                I acknowledge the gap in our age and the physical distance between us, but I truly believe love and understanding easily bridge those miles. While distance means meeting in person isn't simple right now, I promise you this with total respect: before we ever meet in person, I will introduce you to my family with complete honor and clarity.
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="border-blush-100">
+
+                    <!-- Point 3: Gentle Expectations in Love -->
+                    <div class="flex flex-col sm:flex-row gap-5 items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-blush-100 text-blush-600 flex items-center justify-center shrink-0 text-xl font-semibold">
+                            <i class="fa-solid fa-shield-heart"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-2xl font-bold text-burgundy mb-2">My Only Two Gentle Wishes in a Relationship</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                                
+                                <div class="bg-white/60 p-4 rounded-2xl border border-blush-200/50">
+                                    <div class="flex items-center gap-2 text-rosegold-dark font-semibold mb-1">
+                                        <i class="fa-solid fa-camera"></i>
+                                        <span>1. Photos to Adore</span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-burgundy/80 leading-relaxed font-light">
+                                        Having pictures of you to look at when I miss you—requested only after earning your complete trust and comfortable consent.
+                                    </p>
+                                </div>
+
+                                <div class="bg-white/60 p-4 rounded-2xl border border-blush-200/50">
+                                    <div class="flex items-center gap-2 text-rosegold-dark font-semibold mb-1">
+                                        <i class="fa-solid fa-comments"></i>
+                                        <span>2. Gentle Updates</span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-burgundy/80 leading-relaxed font-light">
+                                        Simply keeping me informed about your day. Not to control or restrict you—I deeply respect your personal space—but just because I care about your well-being.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 3: YOUR EXPECTATIONS & HOW WE FIT -->
+        <section class="scroll-mt-12">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center gap-2 text-rosegold-dark mb-2">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    <span class="text-xs font-semibold uppercase tracking-widest">Chapter III</span>
+                </div>
+                <h3 class="font-serif text-3xl sm:text-4xl font-bold text-burgundy">Your Husband Ideal & Me</h3>
+                <p class="text-burgundy/70 mt-2 text-sm sm:text-base max-w-lg mx-auto font-light">
+                    I know you have thoughtful principles for your future husband. While I am not perfect, I strive every day to honor what matters to you:
+                </p>
+            </div>
+
+            <!-- Checklist Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Requirement 1 -->
+                <div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blush-100 flex items-center justify-center text-blush-600 shrink-0 mt-1">
+                            <i class="fa-solid fa-heart-circle-check text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-xl text-burgundy mb-1">Your Ideal: Respectful & Caring</h4>
+                            <p class="text-sm text-burgundy/80 leading-relaxed font-light">
+                                A partner who honors your dreams, listens attentively, and treats you with steady respect.
+                            </p>
+                            <div class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-rosegold-dark bg-blush-100/70 px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-check text-blush-600"></i> My Score: 100% Sincere Commitment
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Requirement 2 -->
+                <div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blush-100 flex items-center justify-center text-blush-600 shrink-0 mt-1">
+                            <i class="fa-solid fa-kaaba text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-xl text-burgundy mb-1">Your Ideal: Faith & Values</h4>
+                            <p class="text-sm text-burgundy/80 leading-relaxed font-light">
+                                Someone grounded in faith, values, and devotion to prayer and righteous living.
+                            </p>
+                            <div class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-rosegold-dark bg-blush-100/70 px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-check text-blush-600"></i> I pray & recite Quran; improving daily despite work
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Requirement 3 -->
+                <div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blush-100 flex items-center justify-center text-blush-600 shrink-0 mt-1">
+                            <i class="fa-solid fa-face-smile text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-xl text-burgundy mb-1">Your Ideal: Bringing Joy & Smiles</h4>
+                            <p class="text-sm text-burgundy/80 leading-relaxed font-light">
+                                A reliable companion who brightens your hard days with warmth and small attentive gestures.
+                            </p>
+                            <div class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-rosegold-dark bg-blush-100/70 px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-check text-blush-600"></i> My Score: Always Observing Small Things
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Requirement 4 -->
+                <div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blush-100 flex items-center justify-center text-blush-600 shrink-0 mt-1">
+                            <i class="fa-solid fa-plant-wilt text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-xl text-burgundy mb-1">Your Ideal: Growing Together</h4>
+                            <p class="text-sm text-burgundy/80 leading-relaxed font-light">
+                                Someone humble enough to learn, adapt, and build a peaceful life side-by-side.
+                            </p>
+                            <div class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-rosegold-dark bg-blush-100/70 px-3 py-1 rounded-full">
+                                <i class="fa-solid fa-check text-blush-600"></i> My Score: Ready to Learn Every Day
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- SECTION 4: THE PROPOSAL QUESTION -->
+        <section id="proposal" class="scroll-mt-12 mb-16">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 md:p-16 text-center relative overflow-hidden border-2 border-blush-200 shadow-xl">
+                <div class="w-16 h-16 rounded-full bg-blush-100 text-blush-500 mx-auto flex items-center justify-center mb-6 text-2xl animate-pulse">
+                    <i class="fa-solid fa-ring"></i>
+                </div>
+
+                <h3 class="font-serif text-3xl sm:text-5xl font-bold text-burgundy mb-6 leading-tight">
+                    Will You Be My Second Half?
+                </h3>
+
+                <p class="text-lg text-burgundy/80 max-w-xl mx-auto font-light mb-10 leading-relaxed">
+                    With complete honesty, deep respect, and a heart ready to care for you—will you take this step with me?
+                </p>
+
+                <!-- Interactive Buttons Area -->
+                <div id="button-wrapper" class="relative min-h-[120px] flex flex-col sm:flex-row items-center justify-center gap-6 p-4">
+                    
+                    <!-- YES BUTTON -->
+                    <button id="yes-btn" onclick="handleYesClick()" class="px-10 py-4 bg-gradient-to-r from-blush-500 to-rosegold text-white text-lg font-semibold rounded-full shadow-lg shadow-blush-500/30 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3 cursor-pointer z-10">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>YES, ABSOLUTELY!</span>
+                    </button>
+
+                    <!-- NO BUTTON (Evasive / Playful Logic) -->
+                    <button id="no-btn" onmouseover="evadeNoButton()" onclick="evadeNoButton()" ontouchstart="evadeNoButton()" class="runaway-btn px-10 py-4 bg-white/90 border border-burgundy/20 text-burgundy/70 text-lg font-medium rounded-full hover:bg-white transition-all duration-150 cursor-pointer shadow-sm z-20">
+                        No 😜
+                    </button>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- CELEBRATION OVERLAY (TRIGGERED ON 'YES') -->
+    <div id="celebration-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-burgundy/40 backdrop-blur-md">
+        <div class="glass-card-dark text-white rounded-3xl p-8 sm:p-12 max-w-lg text-center shadow-2xl transform scale-95 transition-all duration-500 opacity-0 relative overflow-hidden" id="modal-card">
+            
+            <div class="w-20 h-20 bg-blush-500/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-blush-300/30">
+                <i class="fa-solid fa-heart text-blush-300 text-4xl animate-bounce"></i>
+            </div>
+
+            <h2 class="font-serif text-4xl sm:text-5xl font-bold mb-4 text-blush-100">
+                You Made Me The Happiest! ❤️
+            </h2>
+
+            <p class="text-lg text-blush-100/90 font-light mb-8 leading-relaxed">
+                Thank you for trusting my sincere feelings. I promise to cherish you, honor your values, and keep taking care of the small details that make you smile.
+            </p>
+
+            <button onclick="closeModal()" class="px-8 py-3 bg-blush-500 hover:bg-blush-600 text-white font-medium rounded-full transition-colors cursor-pointer text-sm tracking-wide shadow-lg">
+                Forever Starts Now ✨
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // Floating Petals Background Generator
+        function createPetals() {
+            const container = document.getElementById('petals-container');
+            const petalIcons = ['fa-heart', 'fa-spa', 'fa-seedling'];
+            const count = 20;
+
+            for (let i = 0; i < count; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal text-blush-200/50';
+                
+                const randomIcon = petalIcons[Math.floor(Math.random() * petalIcons.length)];
+                petal.innerHTML = `<i class="fa-solid ${randomIcon}"></i>`;
+                
+                petal.style.left = `${Math.random() * 100}vw`;
+                petal.style.top = `100vh`;
+                petal.style.fontSize = `${Math.random() * 16 + 10}px`;
+                petal.style.animationDuration = `${Math.random() * 8 + 8}s`;
+                petal.style.animationDelay = `${Math.random() * 5}s`;
+
+                container.appendChild(petal);
+            }
+        }
+
+        // Playful Evasive NO Button Logic
+        let noCount = 0;
+        function evadeNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            
+            if (noBtn.style.position !== 'fixed') {
+                noBtn.style.position = 'fixed';
+            }
+
+            const padding = 60;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+            const newX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const newY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+
+            noCount++;
+            const funTexts = [
+                "Are you sure? 🥺",
+                "Try again! 😜",
+                "Wrong button! 💕",
+                "Nice try! 😄",
+                "Oops, too slow! 🙈",
+                "You meant YES right? ❤️"
+            ];
+            noBtn.innerText = funTexts[noCount % funTexts.length];
+        }
+
+        // YES Button Celebration Handler
+        function handleYesClick() {
+            const modal = document.getElementById('celebration-modal');
+            const modalCard = document.getElementById('modal-card');
+
+            modal.classList.remove('hidden');
+            
+            setTimeout(() => {
+                modalCard.classList.remove('scale-95', 'opacity-0');
+                modalCard.classList.add('scale-100', 'opacity-100');
+            }, 50);
+
+            fireConfetti();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('celebration-modal');
+            const modalCard = document.getElementById('modal-card');
+
+            modalCard.classList.remove('scale-100', 'opacity-100');
+            modalCard.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Confetti Cannon Trigger
+        function fireConfetti() {
+            const duration = 4 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#f46e88', '#b76e79', '#ffe3e8', '#ffffff']
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#f46e88', '#b76e79', '#ffe3e8', '#ffffff']
+                }));
+            }, 250);
+        }
+
+        window.onload = function() {
+            createPetals();
+        };
+    </script>
+</body>
+</html>
